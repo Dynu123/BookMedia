@@ -1,2 +1,2 @@
 # BookMedia
-A colleciton of books to purchase online 
+A collection of books to purchase online 
