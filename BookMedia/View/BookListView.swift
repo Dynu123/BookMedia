@@ -16,16 +16,7 @@ struct BookListView: View {
     
     var body: some View {
         List(viewModel.books, id: \.id) { book in
-            HStack {
-                VStack {
-                    Text(book.title)
-                    Text("by \(book.author)")
-                }
-                HStack {
-                    Text(book.currencyCode)
-                    Text("\(book.price)")
-                }
-            }
+            BookRow(book: book)
         }
         .onAppear() {
             viewModel.fetchBooks {}
