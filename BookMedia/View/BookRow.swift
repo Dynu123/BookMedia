@@ -20,6 +20,8 @@ struct BookRow: View {
                 Text(book.title)
                     .foregroundColor(.primary)
                     .font(.headline)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
                 Text("by \(book.author)")
                     .font(.subheadline)
                     .foregroundColor(.secondary)

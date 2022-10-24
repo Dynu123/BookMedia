@@ -43,7 +43,7 @@ struct LoginView: View {
                             .bold()
                             .padding()
                             .frame(minWidth: 0, maxWidth: .infinity)
-                            .background(Color.black)
+                            .background(Color.purple)
                             .cornerRadius(10)
                             .padding(.horizontal)
                     }
@@ -64,16 +64,18 @@ struct FormField: View {
         VStack {
             if isSecure {
                 SecureField(fieldName, text: $fieldValue)
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
+                    .font(.system(.headline, design: .rounded))
                     .padding(.horizontal)
+                    .accentColor(Color.purple)
             } else {
                 TextField(fieldName, text: $fieldValue)
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
+                    .font(.system(.headline, design: .rounded))
                     .padding(.horizontal)
+                    .accentColor(Color.purple)
             }
             Divider()
                 .frame(height: 1)
-                .background(Color(red: 240/255, green: 240/255, blue: 240/255))
+                .background(Color.purple.opacity(0.5))
                 .padding(.horizontal)
         } }
 }

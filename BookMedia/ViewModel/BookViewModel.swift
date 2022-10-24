@@ -11,6 +11,9 @@ import Alamofire
 
 class BookViewModel: ObservableObject {
     @Published var books: [Book] = []
+    @Published var isLoading: Bool = false
+    @Published var searchText: String = ""
+    
     private var networkService: NetworkServiceProtocol
     private var bag: [AnyCancellable] = []
 
@@ -19,8 +22,10 @@ class BookViewModel: ObservableObject {
     }
     
     func fetchBooks(completion: @escaping () -> Void) {
+        isLoading = true
         self.networkService.execute(API.getBooks, model: [Book].self) { [weak self] (result: Result<[Book], AFError>) in
             guard let self = self else { return }
+            self.isLoading = false
             switch result {
             case .success(let books):
                 self.books = books

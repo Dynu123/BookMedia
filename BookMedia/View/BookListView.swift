@@ -15,13 +15,35 @@ struct BookListView: View {
     }
     
     var body: some View {
-        List(viewModel.books, id: \.id) { book in
-            BookRow(book: book)
+        ZStack {
+            ScrollView {
+                VStack(spacing: 30) {
+                    SearchBar(text: $viewModel.searchText)
+                    ForEach(viewModel.books.filter({ viewModel.searchText.isEmpty ? true : $0.title.contains(viewModel.searchText ) })) { book in
+                        DisclosureGroup {
+                            BookDetailView(book: book)
+                        } label: {
+                            BookRow(book: book)
+                        }
+                        .accentColor(Color.purple)
+                    }
+                    Spacer()
+                }
+                .padding()
+                if viewModel.isLoading {
+                    LoadingAnimationView {
+                        Text("Fetching books...")
+                    }
+                }
+            }
         }
         .onAppear() {
             viewModel.fetchBooks {}
         }
         .edgesIgnoringSafeArea([.horizontal, .bottom])
+        .navigationBarBackButtonHidden()
+        .navigationTitle("Books")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
 
