@@ -13,6 +13,7 @@ class BookViewModel: ObservableObject {
     @Published var books: [Book] = []
     @Published var isLoading: Bool = false
     @Published var searchText: String = ""
+    @Published var selectedMainTabBarItem: MainTabBarItem = .all
     
     private var networkService: NetworkServiceProtocol
     private var bag: [AnyCancellable] = []

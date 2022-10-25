@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BookRow: View {
-    private var book: Book
+    @State private var book: Book
     
     init(book: Book) {
         self.book = book
@@ -27,13 +27,21 @@ struct BookRow: View {
                     .foregroundColor(.secondary)
             }
             Spacer(minLength: 10)
-            HStack {
-                Text(book.currencyCode)
-                    .foregroundColor(.primary)
-                    .font(.headline)
-                Text("\(book.price)")
-                    .foregroundColor(.primary)
-                    .font(.headline)
+            VStack(alignment: .trailing) {
+                HStack {
+                    Text(book.currencyCode)
+                        .foregroundColor(.primary)
+                        .font(.headline)
+                    Text("\(book.price)")
+                        .foregroundColor(.primary)
+                        .font(.headline)
+                }
+                Spacer()
+                Image(systemName: self.book.isBookmarked ? "bookmark.fill": "bookmark")
+                    .onTapGesture {
+                        self.book.isBookmarked = !self.book.isBookmarked
+                    }
+                Spacer()
             }
         }
         

@@ -15,7 +15,7 @@ struct BookListView: View {
     }
     
     var body: some View {
-        ZStack {
+        VStack {
             ScrollView {
                 VStack(spacing: 30) {
                     SearchBar(text: $viewModel.searchText)
@@ -36,6 +36,7 @@ struct BookListView: View {
                     }
                 }
             }
+            MainTabBarView(selectedItem: $viewModel.selectedMainTabBarItem)
         }
         .onAppear() {
             viewModel.fetchBooks {}
