@@ -11,6 +11,7 @@ import Alamofire
 
 class BookViewModel: ObservableObject {
     @Published var books: [Book] = []
+    @Published var savedBooks: [Book] = []
     @Published var isLoading: Bool = false
     @Published var searchText: String = ""
     @Published var selectedMainTabBarItem: MainTabBarItem = .all
@@ -39,5 +40,14 @@ class BookViewModel: ObservableObject {
                 completion()// for test case
             }
         }.store(in: &bag)
+    }
+    
+    func addToWishlist(book: Book) {
+        if !savedBooks.contains(where: {$0.id == book.id }) && book.isBookmarked {
+            savedBooks.append(book)
+        } else {
+            savedBooks.removeAll(where: {$0.id == book.id})
+        }
+        
     }
 }

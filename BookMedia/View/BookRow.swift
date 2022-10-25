@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BookRow: View {
+    @EnvironmentObject private var viewModel: BookViewModel
     @State private var book: Book
     
     init(book: Book) {
@@ -40,6 +41,7 @@ struct BookRow: View {
                 Image(systemName: self.book.isBookmarked ? "bookmark.fill": "bookmark")
                     .onTapGesture {
                         self.book.isBookmarked = !self.book.isBookmarked
+                        viewModel.addToWishlist(book: book)
                     }
                 Spacer()
             }
