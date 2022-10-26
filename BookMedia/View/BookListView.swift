@@ -10,6 +10,7 @@ import SwiftUI
 struct BookListView: View {
     @ObservedObject private var viewModel: BookViewModel
     @State private var showProfile: Bool = false
+    @State private var navigateToCart = false
     
     init(viewModel: BookViewModel) {
         self.viewModel = viewModel
@@ -17,14 +18,14 @@ struct BookListView: View {
     
     var body: some View {
         ZStack {
-            NavigationLink(destination: CartView(), isActive: $viewModel.navigate) {
+            NavigationLink(destination: CartView().environmentObject(viewModel), isActive: $navigateToCart) {
                 EmptyView()
             }.isDetailLink(false)
             VStack {
                 ScrollView {
                     VStack(spacing: 30) {
                         SearchBar(text: $viewModel.searchText).environmentObject(viewModel)
-                        AllBooksListView().environmentObject(viewModel)
+                        AllBooksListView(navigateToCart: $navigateToCart).environmentObject(viewModel)
                         Spacer()
                     }
                     .padding()

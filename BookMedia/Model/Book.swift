@@ -11,7 +11,7 @@ struct Book: Codable, Identifiable {
     var id: Int
     var title: String
     var isbn: String
-    var price: Int
+    var price: Double
     var currencyCode: String
     var author: String
     

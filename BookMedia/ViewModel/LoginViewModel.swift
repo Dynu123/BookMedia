@@ -20,11 +20,12 @@ class LoginViewModel: ObservableObject {
     }
     
     func login(email: String, password: String) {
-        if validate(email: email, password: password) {
-            navigate = true
-            User.shared.email = email
-        } else {
-            showValidationError = true
-        }
+        navigate = true
+//        if validate(email: email, password: password) {
+//            navigate = true
+//            User.shared.email = email
+//        } else {
+//            showValidationError = true
+//        }
     }
 }

@@ -15,7 +15,8 @@ class BookViewModel: ObservableObject {
     @Published var savedBooks: Set<Int> = [1, 7]
     @Published var isLoading: Bool = false
     @Published var searchText: String = ""
-    @Published var navigate: Bool = false
+    
+    @Published var cartItems: [CartItem] = []
     
     private var networkService: NetworkServiceProtocol
     private var bag: [AnyCancellable] = []
@@ -84,5 +85,26 @@ class BookViewModel: ObservableObject {
             savedBooks.insert(item.id)
         }
         db.save(items: savedBooks)
+    }
+    
+    func addToCart(book: Book) {
+        var addNewProduct = true
+        for (index, item) in cartItems.enumerated() {
+            if item.book.id == book.id {
+                cartItems[index].qty += 1
+                addNewProduct = false
+            }
+        }
+        if addNewProduct {
+            cartItems.append(CartItem(book: book, qty: 1))
+        }
+    }
+    
+    var totalCartPrice: Double {
+        var total: Double = 0.0
+        for each in cartItems {
+            total += each.subTotal
+        }
+        return total
     }
 }

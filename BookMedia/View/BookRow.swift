@@ -33,7 +33,7 @@ struct BookRow: View {
                     Text(book.currencyCode)
                         .foregroundColor(.primary)
                         .font(.headline)
-                    Text("\(book.price)")
+                    Text("\(book.price.trimTrailingZeroes)")
                         .foregroundColor(.primary)
                         .font(.headline)
                 }
