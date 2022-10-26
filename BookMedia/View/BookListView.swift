@@ -9,32 +9,35 @@ import SwiftUI
 
 struct BookListView: View {
     @ObservedObject private var viewModel: BookViewModel
+    @State private var showProfile: Bool = false
     
     init(viewModel: BookViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack(spacing: 30) {
-                    switch viewModel.selectedMainTabBarItem {
-                    case .all, .wishlist:
+        ZStack {
+            NavigationLink(destination: CartView(), isActive: $viewModel.navigate) {
+                EmptyView()
+            }.isDetailLink(false)
+            VStack {
+                ScrollView {
+                    VStack(spacing: 30) {
                         SearchBar(text: $viewModel.searchText).environmentObject(viewModel)
                         AllBooksListView().environmentObject(viewModel)
-                    case .account:
-                        AccountView()
+                        Spacer()
                     }
-                    Spacer()
-                }
-                .padding()
-                if viewModel.isLoading {
-                    LoadingAnimationView {
-                        Text("Fetching books...")
+                    .padding()
+                    if viewModel.isLoading {
+                        LoadingAnimationView {
+                            Text("Fetching books...")
+                        }
                     }
                 }
             }
-            //MainTabBarView(selectedItem: $viewModel.selectedMainTabBarItem)
+            if showProfile {
+                ProfileView(showProfile: $showProfile)
+            }
         }
         .onAppear() {
             viewModel.fetchBooks {}
@@ -45,12 +48,11 @@ struct BookListView: View {
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
             Button {
-                
+                showProfile = true
             } label: {
                 Image(systemName: "person.crop.circle.fill")
                     .accentColor(.purple)
             }
-
         }
     }
 }
@@ -58,50 +60,5 @@ struct BookListView: View {
 struct BookListView_Previews: PreviewProvider {
     static var previews: some View {
         BookListView(viewModel: BookViewModel(networkService: NetworkService()))
-    }
-}
-
-struct AllBooksListView: View {
-    @EnvironmentObject private var viewModel: BookViewModel
-    
-    var body: some View {
-        ForEach(viewModel.filteredItems.filter({ viewModel.searchText.isEmpty ? true : $0.title.contains(viewModel.searchText)})) { book in
-            DisclosureGroup {
-                BookDetailView(book: book)
-            } label: {
-                BookRow(book: book)
-            }
-            .accentColor(Color.purple)
-        }
-        .onAppear() {
-            if viewModel.selectedMainTabBarItem == .wishlist {
-                viewModel.sortFavs()
-            }
-            
-        }
-    }
-}
-
-struct WishListView: View {
-    @EnvironmentObject private var viewModel: BookViewModel
-    
-    var body: some View {
-        ForEach(viewModel.filteredItems.filter({ viewModel.searchText.isEmpty ? true : $0.title.contains(viewModel.searchText ) })) { book in
-            DisclosureGroup {
-                BookDetailView(book: book)
-            } label: {
-                BookRow(book: book)
-            }
-            .accentColor(Color.purple)
-        }
-        .onAppear() {
-            viewModel.sortFavs()
-        }
-    }
-}
-
-struct AccountView: View {
-    var body: some View {
-        EmptyView()
     }
 }

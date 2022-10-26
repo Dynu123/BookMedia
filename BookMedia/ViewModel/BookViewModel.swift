@@ -15,7 +15,7 @@ class BookViewModel: ObservableObject {
     @Published var savedBooks: Set<Int> = [1, 7]
     @Published var isLoading: Bool = false
     @Published var searchText: String = ""
-    @Published var selectedMainTabBarItem: MainTabBarItem = .all
+    @Published var navigate: Bool = false
     
     private var networkService: NetworkServiceProtocol
     private var bag: [AnyCancellable] = []

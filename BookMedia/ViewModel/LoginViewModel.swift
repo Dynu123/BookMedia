@@ -14,14 +14,17 @@ class LoginViewModel: ObservableObject {
     
     func validate(email: String, password: String) -> Bool {
         guard email != "" && password != "" && email.isValid else {
-            showValidationError = true
             return false
         }
-        showValidationError = false
         return true
     }
     
     func login(email: String, password: String) {
-        User.shared.email = email
+        if validate(email: email, password: password) {
+            navigate = true
+            User.shared.email = email
+        } else {
+            showValidationError = true
+        }
     }
 }

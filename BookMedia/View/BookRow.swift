@@ -39,14 +39,13 @@ struct BookRow: View {
                 }
                 Spacer()
                 Image(systemName: viewModel.contains(book) ? "bookmark.fill" : "bookmark")
-                                            .foregroundColor(.purple)
-                                            .onTapGesture {
-                                                viewModel.toggleFav(item: book)
-                                            }
+                    .foregroundColor(.purple)
+                    .onTapGesture {
+                        viewModel.toggleFav(item: book)
+                    }
                 Spacer()
             }
         }
-        
     }
 }
 

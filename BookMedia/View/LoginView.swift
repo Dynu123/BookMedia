@@ -19,10 +19,10 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             ZStack {
-            NavigationLink(destination: BookListView(viewModel: BookViewModel(networkService: NetworkService())), isActive: $viewModel.navigate) {
-                EmptyView()
-            }.isDetailLink(false)
-            
+                NavigationLink(destination: BookListView(viewModel: BookViewModel(networkService: NetworkService())), isActive: $viewModel.navigate) {
+                    EmptyView()
+                }.isDetailLink(false)
+                
                 VStack(alignment: .leading) {
                     FormField(fieldName: "Enter email", fieldValue: $email)
                         .padding(.bottom)
@@ -35,7 +35,8 @@ struct LoginView: View {
                     }
                     
                     Button {
-                        viewModel.navigate = viewModel.validate(email: email, password: password)
+                        //viewModel.navigate = viewModel.validate(email: email, password: password)
+                        viewModel.login(email: email, password: password)
                     } label: {
                         Text("Sign In")
                             .font(.system(.body, design: .rounded))
@@ -54,30 +55,6 @@ struct LoginView: View {
         }
         
     }
-}
-
-struct FormField: View {
-    var fieldName = ""
-    @Binding var fieldValue: String
-    var isSecure = false
-    var body: some View {
-        VStack {
-            if isSecure {
-                SecureField(fieldName, text: $fieldValue)
-                    .font(.system(.headline, design: .rounded))
-                    .padding(.horizontal)
-                    .accentColor(Color.purple)
-            } else {
-                TextField(fieldName, text: $fieldValue)
-                    .font(.system(.headline, design: .rounded))
-                    .padding(.horizontal)
-                    .accentColor(Color.purple)
-            }
-            Divider()
-                .frame(height: 1)
-                .background(Color.purple.opacity(0.5))
-                .padding(.horizontal)
-        } }
 }
 
 struct ContentView_Previews: PreviewProvider {

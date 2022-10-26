@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BookDetailView: View {
+    @EnvironmentObject private var viewModel: BookViewModel
     @State private var book: Book
     
     init(book: Book) {
@@ -21,6 +22,7 @@ struct BookDetailView: View {
                 .font(.subheadline)
             Button {
                 //buy action
+                viewModel.navigate = true
             } label: {
                 HStack {
                     Text("Buy this book")
