@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct OrderConfirmationView: View {
+    @EnvironmentObject private var viewModel: BookViewModel
+    @Binding var navigateToHome: Bool
+    
     var body: some View {
         VStack {
             Spacer()
@@ -18,6 +21,8 @@ struct OrderConfirmationView: View {
             Spacer()
             Button {
                 //
+                navigateToHome = false
+                viewModel.cartItems = []
             } label: {
                 Text("Go to home page")
                     .font(.system(.body, design: .rounded))
@@ -35,8 +40,3 @@ struct OrderConfirmationView: View {
     }
 }
 
-struct OrderConfirmationView_Previews: PreviewProvider {
-    static var previews: some View {
-        OrderConfirmationView()
-    }
-}

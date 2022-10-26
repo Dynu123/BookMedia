@@ -10,23 +10,15 @@ import SwiftUI
 struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
-    @ObservedObject private var viewModel: LoginViewModel
-    
-    init(viewModel: LoginViewModel) {
-        self.viewModel = viewModel
-    }
+    @StateObject private var viewModel = LoginViewModel()
+    @EnvironmentObject private var authViewModel: AuthViewModel
     
     var body: some View {
-        NavigationView {
             ZStack {
-                NavigationLink(destination: BookListView(viewModel: BookViewModel(networkService: NetworkService())), isActive: $viewModel.navigate) {
-                    EmptyView()
-                }.isDetailLink(false)
-                
                 VStack(alignment: .leading) {
-                    FormField(fieldName: "Enter email", fieldValue: $email)
+                    FormField(fieldName: "Enter email", fieldValue: $viewModel.credentials.email)
                         .padding(.bottom)
-                    FormField(fieldName: "Enter password", fieldValue: $password, isSecure: true)
+                    FormField(fieldName: "Enter password", fieldValue: $viewModel.credentials.password, isSecure: true)
                         .padding(.bottom)
                     if viewModel.showValidationError {
                         Text("Incorrect username and password")
@@ -35,8 +27,9 @@ struct LoginView: View {
                     }
                     
                     Button {
-                        //viewModel.navigate = viewModel.validate(email: email, password: password)
-                        viewModel.login(email: email, password: password)
+                        viewModel.login() { success in
+                            authViewModel.updateValidation(success: success)
+                        }
                     } label: {
                         Text("Sign In")
                             .font(.system(.body, design: .rounded))
@@ -44,21 +37,18 @@ struct LoginView: View {
                             .bold()
                             .padding()
                             .frame(minWidth: 0, maxWidth: .infinity)
-                            .background(Color.purple)
+                            .background(viewModel.loginDisabled ? Color.purple.opacity(0.5) :  Color.purple)
                             .cornerRadius(10)
                             .padding(.horizontal)
                     }
+                    .disabled(viewModel.loginDisabled)
                 }
                 .padding()
+                .autocapitalization(.none)
             }
             
-        }
+        
         
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView(viewModel: LoginViewModel())
-    }
-}

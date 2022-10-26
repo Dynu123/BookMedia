@@ -8,8 +8,18 @@
 import Foundation
 import Combine
 
+struct Credentials: Codable {
+    var email: String = ""
+    var password: String = ""
+}
+
 class LoginViewModel: ObservableObject {
-    @Published var navigate: Bool = false
+    @Published var credentials = Credentials()
+    
+    var loginDisabled: Bool {
+        credentials.email.isEmpty || credentials.password.isEmpty
+    }
+    
     @Published var showValidationError: Bool = false
     
     func validate(email: String, password: String) -> Bool {
@@ -19,13 +29,14 @@ class LoginViewModel: ObservableObject {
         return true
     }
     
-    func login(email: String, password: String) {
-        navigate = true
-//        if validate(email: email, password: password) {
-//            navigate = true
-//            User.shared.email = email
-//        } else {
-//            showValidationError = true
-//        }
+    func login(completion: @escaping (Bool) -> Void) {
+        if validate(email: credentials.email, password: credentials.password) {
+            User.shared.email = credentials.email
+            completion(true)
+        } else {
+            showValidationError = true
+            self.credentials = Credentials()
+            completion(false)
+        }
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @Environment(\.presentationMode) var presentation
+    @EnvironmentObject private var authViewModel: AuthViewModel
     @Binding var showProfile: Bool
     
     var body: some View {
@@ -29,7 +29,7 @@ struct ProfileView: View {
                     .padding(8)
                 Text(User.shared.email)
                 Button("Logout") {
-                    self.presentation.wrappedValue.dismiss()
+                    authViewModel.updateValidation(success: false)
                 }
                 .foregroundColor(.purple)
                 .padding(8)
