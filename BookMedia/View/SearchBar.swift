@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchBar: View {
     @Binding var text: String
     @State private var isEditing = false
+    @EnvironmentObject private var viewModel: BookViewModel
     
     private var searchText: Binding<String> {
         return Binding<String>(
@@ -68,6 +69,28 @@ struct SearchBar: View {
                 .transition(.move(edge: .trailing))
                 .animation(.default)
             }
+            SortView()
+        }
+    }
+}
+
+struct SortView: View {
+    @EnvironmentObject private var viewModel: BookViewModel
+    
+    var body: some View {
+        Menu {
+            Button("By price") {
+                viewModel.sortByPrice()
+            }
+            Button("By currency") {
+                viewModel.sortByCurrency()
+            }
+            Button("By favourites") {
+                viewModel.sortFavs()
+            }
+        } label: {
+            Image(systemName: "arrow.up.arrow.down")
+                .accentColor(.purple)
         }
     }
 }

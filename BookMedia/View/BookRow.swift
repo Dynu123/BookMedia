@@ -38,11 +38,11 @@ struct BookRow: View {
                         .font(.headline)
                 }
                 Spacer()
-                Image(systemName: self.book.isBookmarked ? "bookmark.fill": "bookmark")
-                    .onTapGesture {
-                        self.book.isBookmarked = !self.book.isBookmarked
-                        viewModel.addToWishlist(book: book)
-                    }
+                Image(systemName: viewModel.contains(book) ? "bookmark.fill" : "bookmark")
+                                            .foregroundColor(.purple)
+                                            .onTapGesture {
+                                                viewModel.toggleFav(item: book)
+                                            }
                 Spacer()
             }
         }

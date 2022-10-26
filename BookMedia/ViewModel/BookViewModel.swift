@@ -11,16 +11,18 @@ import Alamofire
 
 class BookViewModel: ObservableObject {
     @Published var books: [Book] = []
-    @Published var savedBooks: [Book] = []
+    @Published var showingFavs = false
+    @Published var savedBooks: Set<Int> = [1, 7]
     @Published var isLoading: Bool = false
     @Published var searchText: String = ""
     @Published var selectedMainTabBarItem: MainTabBarItem = .all
     
     private var networkService: NetworkServiceProtocol
     private var bag: [AnyCancellable] = []
-
+    
     public init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
+        self.savedBooks = db.load()
     }
     
     func fetchBooks(completion: @escaping () -> Void) {
@@ -42,12 +44,45 @@ class BookViewModel: ObservableObject {
         }.store(in: &bag)
     }
     
-    func addToWishlist(book: Book) {
-        if !savedBooks.contains(where: {$0.id == book.id }) && book.isBookmarked {
-            savedBooks.append(book)
-        } else {
-            savedBooks.removeAll(where: {$0.id == book.id})
+    // Filter saved items
+    var filteredItems: [Book]  {
+        if showingFavs {
+            return books.filter { savedBooks.contains($0.id) }
         }
-        
+        return books
+    }
+    
+    private var db = Database()
+    
+    func sortFavs() {
+        //withAnimation() {
+        showingFavs.toggle()
+        //}
+    }
+    
+    func sortByPrice() {
+        books.sort { b1, b2 in
+            b1.price < b2.price
+        }
+    }
+    
+    func sortByCurrency() {
+        books.sort { b1, b2 in
+            b1.currencyCode < b2.currencyCode
+        }
+    }
+    
+    func contains(_ item: Book) -> Bool {
+        savedBooks.contains(item.id)
+    }
+    
+    // Toggle saved items
+    func toggleFav(item: Book) {
+        if contains(item) {
+            savedBooks.remove(item.id)
+        } else {
+            savedBooks.insert(item.id)
+        }
+        db.save(items: savedBooks)
     }
 }
