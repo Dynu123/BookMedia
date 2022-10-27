@@ -9,8 +9,6 @@ import XCTest
 @testable import BookMedia
 
 final class EmailValidationTests: XCTestCase {
-
-    let viewModel = LoginViewModel()
     
     func test_email_invalid() {
         let result1 = "abc".isValid
@@ -29,6 +27,8 @@ final class EmailValidationTests: XCTestCase {
     func test_email_valid() {
         let result1 = "abc@gmail.com".isValid
         XCTAssertEqual(result1, true)
+        let result2 = "abc@gmail.co".isValid
+        XCTAssertEqual(result2, true)
     }
     
     func test_email_empty() {

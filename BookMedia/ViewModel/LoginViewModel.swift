@@ -14,27 +14,28 @@ struct Credentials: Codable {
 }
 
 class LoginViewModel: ObservableObject {
-    @Published var credentials = Credentials()
+    @Published var credentials: Credentials
+    
+    init(credentials: Credentials) {
+        self.credentials = credentials
+    }
     
     var loginDisabled: Bool {
-        credentials.email.isEmpty || credentials.password.isEmpty
+        credentials.email.isEmpty || credentials.password.isEmpty || !credentials.email.isValid
     }
     
-    @Published var showValidationError: Bool = false
-    
-    func validate(email: String, password: String) -> Bool {
-        guard email != "" && password != "" && email.isValid else {
-            return false
-        }
-        return true
-    }
+//    func validate(credentials: Credentials) -> Bool {
+//        guard credentials.email != "" && credentials.password != "" && credentials.email.isValid else {
+//            return false
+//        }
+//        return true
+//    }
     
     func login(completion: @escaping (Bool) -> Void) {
-        if validate(email: credentials.email, password: credentials.password) {
+        if !loginDisabled {
             User.shared.email = credentials.email
             completion(true)
         } else {
-            showValidationError = true
             self.credentials = Credentials()
             completion(false)
         }

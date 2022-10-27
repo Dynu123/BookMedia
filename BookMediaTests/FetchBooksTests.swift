@@ -36,7 +36,7 @@ final class FetchBooksTests: XCTestCase {
 
     // MARK: - Test for validating data on API call failure
     func testDatasource_onAPIcall_failure() throws {
-        let error = AFError.createURLRequestFailed(error: NSError())
+        let error = AFError.createURLRequestFailed(error: NSError(domain: "", code: 400, userInfo: [:]))
         networkService.fetchBooks = Fail(error: error).eraseToAnyPublisher()
         let expectation = expectation(description: "wait for completion")
         viewModel.fetchBooks {

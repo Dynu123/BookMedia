@@ -11,8 +11,11 @@ import Alamofire
 
 class BookViewModel: ObservableObject {
     @Published var books: [Book] = []
+    @Published var book: Book = Book.sample
     @Published var showingFavs = false
-    @Published var savedBooks: Set<Int> = [1, 7]
+    @Published var savedBooks: Set<Int> = []
+    private var db = Database()
+    
     @Published var isLoading: Bool = false
     @Published var searchText: String = ""
     
@@ -21,7 +24,7 @@ class BookViewModel: ObservableObject {
     private var networkService: NetworkServiceProtocol
     private var bag: [AnyCancellable] = []
     
-    public init(networkService: NetworkServiceProtocol) {
+    init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
         self.savedBooks = db.load()
     }
@@ -45,6 +48,25 @@ class BookViewModel: ObservableObject {
         }.store(in: &bag)
     }
     
+    func fetchBookDetail(id: Int, completion: @escaping () -> Void) {
+        isLoading = true
+        self.networkService.execute(API.getBookDetail(id: id), model: Book.self) { [weak self] (result: Result<Book, AFError>) in
+            guard let self = self else { return }
+            self.isLoading = false
+            switch result {
+            case .success(let book):
+                self.book = book
+                print(self.book)
+                completion() // for test case
+            case .failure(let error):
+                if let err = error as AFError? {
+                    print(err.localizedDescription)
+                }
+                completion()// for test case
+            }
+        }.store(in: &bag)
+    }
+    
     // Filter saved items
     var filteredItems: [Book]  {
         if showingFavs {
@@ -53,12 +75,8 @@ class BookViewModel: ObservableObject {
         return books
     }
     
-    private var db = Database()
-    
     func sortFavs() {
-        //withAnimation() {
         showingFavs.toggle()
-        //}
     }
     
     func sortByPrice() {

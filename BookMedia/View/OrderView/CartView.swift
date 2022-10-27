@@ -48,14 +48,12 @@ struct CartView: View {
                     .padding(.horizontal)
             }
             .isDetailLink(false)
-            
         }
         .padding()
         .navigationBarBackButtonHidden()
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    //presentation.wrappedValue.dismiss()
                     navigateToCompletion = false
                 } label: {
                     Image(systemName: "arrow.left")
@@ -66,7 +64,6 @@ struct CartView: View {
         }
         .navigationTitle("My cart")
         .navigationBarTitleDisplayMode(.inline)
-        
     }
 }
 

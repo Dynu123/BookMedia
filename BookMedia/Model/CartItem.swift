@@ -15,3 +15,7 @@ struct CartItem {
         return book.price * qty
     }
 }
+
+extension CartItem {
+    static var sample = CartItem(book: Book.sample, qty: 3)
+}

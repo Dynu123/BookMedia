@@ -9,8 +9,9 @@ import SwiftUI
 
 struct FormField: View {
     var fieldName = ""
-    @Binding var fieldValue: String
     var isSecure = false
+    @Binding var fieldValue: String
+    
     var body: some View {
         VStack {
             if isSecure {

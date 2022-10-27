@@ -19,7 +19,6 @@ struct BookDetailView: View {
     
     var body: some View {
         ZStack {
-            
             VStack(alignment: .leading) {
                 Text("isbn: \(book.isbn)")
                     .foregroundColor(.secondary)

@@ -58,7 +58,6 @@ struct SearchBar: View {
                 Button(action: {
                     self.isEditing = false
                     self.text = ""
-                    
                     // Dismiss the keyboard
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }) {
@@ -92,11 +91,5 @@ struct SortView: View {
             Image(systemName: "arrow.up.arrow.down")
                 .accentColor(.purple)
         }
-    }
-}
-
-struct SearchBar_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchBar(text: .constant(""))
     }
 }

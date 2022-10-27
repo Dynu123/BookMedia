@@ -36,6 +36,5 @@ struct ProfileView: View {
             }
         }
         .frame(maxWidth: 200, maxHeight: 200)
-        
     }
 }

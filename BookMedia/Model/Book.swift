@@ -14,11 +14,13 @@ struct Book: Codable, Identifiable {
     var price: Double
     var currencyCode: String
     var author: String
+    var description: String?
     
 }
 
 extension Book {
     static let sample = Book(id: 0, title: "sample title", isbn: "sample isbn", price: 123, currencyCode: "EUR", author: "sample author")
+    static let sample2 = Book(id: 1, title: "sample title", isbn: "sample isbn", price: 123, currencyCode: "EUR", author: "sample author")
     
     static let sampleArray = [
         Book(id: 1, title: "Android", isbn: "123456", price: 123, currencyCode: "EUR", author: "author1"),
