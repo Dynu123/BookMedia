@@ -9,8 +9,9 @@ import SwiftUI
 
 struct BookDetailView: View {
     @EnvironmentObject private var viewModel: BookViewModel
-    @State private var book: Book
+    private var book: Book
     @Binding var navigateToCart: Bool
+    @Environment(\.presentationMode) var presentationMode
     
     init(book: Book, navigateToCart: Binding<Bool>) {
         self.book = book
@@ -19,29 +20,79 @@ struct BookDetailView: View {
     
     var body: some View {
         ZStack {
-            VStack(alignment: .leading) {
-                Text("isbn: \(book.isbn)")
-                    .foregroundColor(.secondary)
-                    .font(.subheadline)
-                Button {
-                    //buy action
-                    viewModel.addToCart(book: book)
-                    navigateToCart = true
-                } label: {
+            NavigationLink(destination: CartView(navigateToCompletion: $navigateToCart).environmentObject(viewModel), isActive: $navigateToCart) {
+                EmptyView()
+            }.isDetailLink(false)
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text(viewModel.book.title)
+                        .foregroundColor(.primary)
+                        .font(.system(.headline, design: .rounded))
+                    Text("by \(viewModel.book.author)")
+                        .font(.system(.subheadline, design: .rounded))
+                        .foregroundColor(.secondary)
+                    Text("ISBN: \(viewModel.book.isbn)")
+                        .foregroundColor(.secondary)
+                        .font(.system(.subheadline, design: .rounded))
+                        .padding(.vertical, 5)
                     HStack {
-                        Text("Buy this book")
-                            .font(.system(.body, design: .rounded))
-                            .foregroundColor(.white)
-                            .bold()
-                            .padding()
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .background(Color.purple)
-                            .cornerRadius(10)
-                            .padding(.horizontal)
+                        Text(viewModel.book.currencyCode + " " +  "\(viewModel.book.price.trimTrailingZeroes)")
+                            .foregroundColor(.purple)
+                            .font(.system(.headline, design: .rounded))
+                        Spacer()
+                        Image(systemName: viewModel.contains(book) ? "bookmark.fill" : "bookmark")
+                            .foregroundColor(.purple)
+                            .onTapGesture {
+                                viewModel.toggleFav(item: viewModel.book)
+                            }
+                    }.padding(.vertical, 10)
+                    Text("About the book:")
+                        .foregroundColor(.primary)
+                        .font(.system(.headline, design: .rounded))
+                        .padding(.vertical, 5)
+                    Text(viewModel.book.description ?? "")
+                        .foregroundColor(.secondary)
+                        .font(.system(.subheadline, design: .rounded))
+                    Spacer()
+                    
+                    Button {
+                        //buy action
+                        viewModel.addToCart(book: viewModel.book)
+                        navigateToCart = true
+                    } label: {
+                        HStack {
+                            Text("Buy this book")
+                                .font(.system(.body, design: .rounded))
+                                .foregroundColor(.white)
+                                .bold()
+                                .padding()
+                                .frame(minWidth: 0, maxWidth: .infinity)
+                                .background(Color.purple)
+                                .cornerRadius(10)
+                        }
                     }
+                    .padding(.vertical, 40)
                 }
+                .padding(.horizontal)
             }
         }
+        .onAppear() {
+            viewModel.fetchBookDetail(id: book.id) {}
+        }
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Image(systemName: "arrow.left")
+                        .accentColor(.purple)
+                }
+                
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        
     }
 }
 

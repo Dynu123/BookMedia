@@ -10,14 +10,16 @@ import SwiftUI
 struct CartView: View {
     @EnvironmentObject private var viewModel: BookViewModel
     @Binding var navigateToCompletion: Bool
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(viewModel.cartItems.indices, id: \.self) { index in
                 Text(viewModel.cartItems[index].book.title)
-                    .font(.headline)
+                    .font(.system(.headline, design: .rounded))
                 Stepper {
                     Text("Qty: \(viewModel.cartItems[index].qty.trimTrailingZeroes)")
+                        .font(.system(.headline, design: .rounded))
                 } onIncrement: {
                     viewModel.cartItems[index].qty += 1
                 } onDecrement: {
@@ -29,11 +31,11 @@ struct CartView: View {
             Spacer()
             HStack {
                 Text("Total price")
-                    .font(.title2)
+                    .font(.system(.title2, design: .rounded))
                     .bold()
                 Spacer()
                 Text(viewModel.totalCartPrice.trimTrailingZeroes)
-                    .font(.title2)
+                    .font(.system(.title2, design: .rounded))
                     .bold()
             }
             NavigationLink(destination: OrderConfirmationView(navigateToHome: $navigateToCompletion).environmentObject(viewModel)) {
@@ -54,7 +56,7 @@ struct CartView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
-                    navigateToCompletion = false
+                    presentationMode.wrappedValue.dismiss()
                 } label: {
                     Image(systemName: "arrow.left")
                         .accentColor(.purple)

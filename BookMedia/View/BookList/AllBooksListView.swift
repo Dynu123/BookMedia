@@ -13,12 +13,12 @@ struct AllBooksListView: View {
     
     var body: some View {
         ForEach(viewModel.filteredItems.filter({ viewModel.searchText.isEmpty ? true : $0.title.contains(viewModel.searchText)})) { book in
-            DisclosureGroup {
-                BookDetailView(book: book, navigateToCart: $navigateToCart)
+            NavigationLink {
+                BookDetailView(book: book, navigateToCart: $navigateToCart).environmentObject(viewModel)
             } label: {
                 BookRow(book: book)
-            }
-            .accentColor(Color.purple)
+            }.isDetailLink(false)
+                .accentColor(Color.purple)
         }
     }
 }

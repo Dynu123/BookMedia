@@ -20,11 +20,11 @@ struct BookRow: View {
             VStack(alignment: .leading) {
                 Text(book.title)
                     .foregroundColor(.primary)
-                    .font(.headline)
+                    .font(.system(.headline, design: .rounded))
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
                 Text("by \(book.author)")
-                    .font(.subheadline)
+                    .font(.system(.subheadline, design: .rounded))
                     .foregroundColor(.secondary)
             }
             Spacer(minLength: 10)
@@ -32,10 +32,10 @@ struct BookRow: View {
                 HStack {
                     Text(book.currencyCode)
                         .foregroundColor(.primary)
-                        .font(.headline)
+                        .font(.system(.headline, design: .rounded))
                     Text("\(book.price.trimTrailingZeroes)")
                         .foregroundColor(.primary)
-                        .font(.headline)
+                        .font(.system(.headline, design: .rounded))
                 }
                 Spacer()
                 Image(systemName: viewModel.contains(book) ? "bookmark.fill" : "bookmark")
@@ -49,8 +49,3 @@ struct BookRow: View {
     }
 }
 
-struct BookRow_Previews: PreviewProvider {
-    static var previews: some View {
-        BookRow(book: .sample)
-    }
-}

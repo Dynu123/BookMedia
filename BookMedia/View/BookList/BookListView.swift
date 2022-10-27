@@ -15,9 +15,6 @@ struct BookListView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                NavigationLink(destination: CartView(navigateToCompletion: $navigateToCart).environmentObject(viewModel), isActive: $navigateToCart) {
-                    EmptyView()
-                }.isDetailLink(false)
                 VStack {
                     ScrollView {
                         VStack(spacing: 30) {
