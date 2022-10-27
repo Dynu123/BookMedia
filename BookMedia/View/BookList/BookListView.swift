@@ -25,7 +25,7 @@ struct BookListView: View {
                         .padding()
                         if viewModel.isLoading {
                             LoadingAnimationView {
-                                Text("Fetching books...")
+                                Text("Loading...")
                             }
                         }
                     }

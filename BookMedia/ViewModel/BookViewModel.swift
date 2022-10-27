@@ -75,8 +75,12 @@ class BookViewModel: ObservableObject {
         return books
     }
     
+    func showAll() {
+        showingFavs = false
+    }
+    
     func sortFavs() {
-        showingFavs.toggle()
+        showingFavs = true
     }
     
     func sortByPrice() {

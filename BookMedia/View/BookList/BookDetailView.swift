@@ -52,7 +52,7 @@ struct BookDetailView: View {
                         .padding(.vertical, 5)
                     Text(viewModel.book.description ?? "")
                         .foregroundColor(.secondary)
-                        .font(.system(.subheadline, design: .rounded))
+                        .font(.system(.headline, design: .rounded))
                     Spacer()
                     
                     Button {
@@ -74,6 +74,11 @@ struct BookDetailView: View {
                     .padding(.vertical, 40)
                 }
                 .padding(.horizontal)
+            }
+            if viewModel.isLoading {
+                LoadingAnimationView {
+                    Text("Loading...")
+                }
             }
         }
         .onAppear() {

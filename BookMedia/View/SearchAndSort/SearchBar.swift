@@ -24,7 +24,7 @@ struct SearchBar: View {
     
     var body: some View {
         HStack {
-            TextField("Search ...", text: searchText)
+            TextField("Search", text: searchText)
                 .padding(7)
                 .padding(.horizontal, 25)
                 .background(Color(.systemGray6))
@@ -86,6 +86,9 @@ struct SortView: View {
             }
             Button("By favourites") {
                 viewModel.sortFavs()
+            }
+            Button("Show all") {
+                viewModel.showAll()
             }
         } label: {
             Image(systemName: "arrow.up.arrow.down")
