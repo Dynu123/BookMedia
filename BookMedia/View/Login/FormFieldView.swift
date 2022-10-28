@@ -18,16 +18,16 @@ struct FormField: View {
                 SecureField(fieldName, text: $fieldValue)
                     .font(.system(.headline, design: .rounded))
                     .padding(.horizontal)
-                    .accentColor(Color.purple)
+                    .accentColor(Color.theme)
             } else {
                 TextField(fieldName, text: $fieldValue)
                     .font(.system(.headline, design: .rounded))
                     .padding(.horizontal)
-                    .accentColor(Color.purple)
+                    .accentColor(Color.theme)
             }
             Divider()
                 .frame(height: 1)
-                .background(Color.purple.opacity(0.5))
+                .background(Color.theme.opacity(0.5))
                 .padding(.horizontal)
         } }
 }

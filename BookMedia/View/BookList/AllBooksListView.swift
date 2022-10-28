@@ -18,7 +18,7 @@ struct AllBooksListView: View {
             } label: {
                 BookRow(book: book)
             }.isDetailLink(false)
-                .accentColor(Color.purple)
+                .accentColor(Color.theme)
         }
     }
 }

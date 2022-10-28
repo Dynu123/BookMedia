@@ -39,7 +39,7 @@ struct BookRow: View {
                 }
                 Spacer()
                 Image(systemName: viewModel.contains(book) ? "bookmark.fill" : "bookmark")
-                    .foregroundColor(.purple)
+                    .foregroundColor(Color.theme)
                     .onTapGesture {
                         viewModel.toggleFav(item: book)
                     }

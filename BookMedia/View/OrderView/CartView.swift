@@ -45,9 +45,8 @@ struct CartView: View {
                     .bold()
                     .padding()
                     .frame(minWidth: 0, maxWidth: .infinity)
-                    .background(Color.purple)
+                    .background(Color.theme)
                     .cornerRadius(10)
-                    .padding(.horizontal)
             }
             .isDetailLink(false)
         }
@@ -59,7 +58,7 @@ struct CartView: View {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Image(systemName: "arrow.left")
-                        .accentColor(.purple)
+                        .accentColor(Color.theme)
                 }
                 
             }

@@ -46,7 +46,7 @@ struct BookListView: View {
                     showProfile = true
                 } label: {
                     Image(systemName: "person.crop.circle.fill")
-                        .accentColor(.purple)
+                        .accentColor(Color.theme)
                 }
             }
         }

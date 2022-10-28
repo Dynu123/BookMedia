@@ -18,23 +18,11 @@ struct LoginView: View {
                     .padding(.bottom)
                 FormField(fieldName: "Enter password", isSecure: true, fieldValue: $viewModel.credentials.password)
                     .padding(.bottom)
-                
-                Button {
+                SolidButton(title: "Sign In") {
                     viewModel.login() { success in
                         authViewModel.updateValidation(success: success)
                     }
-                } label: {
-                    Text("Sign In")
-                        .font(.system(.body, design: .rounded))
-                        .foregroundColor(.white)
-                        .bold()
-                        .padding()
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .background(viewModel.loginDisabled ? Color.purple.opacity(0.5) :  Color.purple)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
-                }
-                .disabled(viewModel.loginDisabled)
+                }.disabled(viewModel.loginDisabled)
             }
             .padding()
             .autocapitalization(.none)

@@ -29,7 +29,7 @@ struct SearchBar: View {
                 .padding(.horizontal, 25)
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
-                .accentColor(.purple)
+                .accentColor(Color.theme)
                 .overlay(
                     HStack {
                         Image(systemName: "magnifyingglass")
@@ -62,7 +62,7 @@ struct SearchBar: View {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }) {
                     Text("Cancel")
-                        .foregroundColor(.purple)
+                        .foregroundColor(Color.theme)
                 }
                 .padding(.trailing, 10)
                 .transition(.move(edge: .trailing))
@@ -92,7 +92,7 @@ struct SortView: View {
             }
         } label: {
             Image(systemName: "arrow.up.arrow.down")
-                .accentColor(.purple)
+                .accentColor(Color.theme)
         }
     }
 }

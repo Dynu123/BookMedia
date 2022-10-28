@@ -58,7 +58,13 @@
 		869CE1CC29098A8C00FF8804 /* OrderConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 869CE1CA29098A8A00FF8804 /* OrderConfirmationView.swift */; };
 		86B3272D2906D19D00708D84 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B3272C2906D19D00708D84 /* LoadingAnimationView.swift */; };
 		86B3272E2906D19D00708D84 /* LoadingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B3272C2906D19D00708D84 /* LoadingAnimationView.swift */; };
+		86BDE996290B4935006E4816 /* ButtonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BDE995290B4935006E4816 /* ButtonHelpers.swift */; };
+		86BDE997290B4935006E4816 /* ButtonHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BDE995290B4935006E4816 /* ButtonHelpers.swift */; };
+		86BDE999290B4AD0006E4816 /* ColorHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BDE998290B4AD0006E4816 /* ColorHelpers.swift */; };
+		86BDE99A290B4AD0006E4816 /* ColorHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BDE998290B4AD0006E4816 /* ColorHelpers.swift */; };
 		86BDF07E290B022100E7E9C5 /* SavedItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BDF07D290B022100E7E9C5 /* SavedItemTests.swift */; };
+		86CDD180290B516D00BC69EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CDD17F290B516C00BC69EC /* LaunchScreen.storyboard */; };
+		86CDD181290B516D00BC69EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86CDD17F290B516C00BC69EC /* LaunchScreen.storyboard */; };
 		86D88D71290063EB004B456A /* BookMediaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D88D70290063EB004B456A /* BookMediaApp.swift */; };
 		86D88D73290063EB004B456A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D88D72290063EB004B456A /* LoginView.swift */; };
 		86D88D75290063EE004B456A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86D88D74290063EE004B456A /* Assets.xcassets */; };
@@ -106,7 +112,10 @@
 		86910C112900C8480048A7BD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		869CE1CA29098A8A00FF8804 /* OrderConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationView.swift; sourceTree = "<group>"; };
 		86B3272C2906D19D00708D84 /* LoadingAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimationView.swift; sourceTree = "<group>"; };
+		86BDE995290B4935006E4816 /* ButtonHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonHelpers.swift; sourceTree = "<group>"; };
+		86BDE998290B4AD0006E4816 /* ColorHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelpers.swift; sourceTree = "<group>"; };
 		86BDF07D290B022100E7E9C5 /* SavedItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedItemTests.swift; sourceTree = "<group>"; };
+		86CDD17F290B516C00BC69EC /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86D88D6D290063EB004B456A /* BookMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86D88D70290063EB004B456A /* BookMediaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMediaApp.swift; sourceTree = "<group>"; };
 		86D88D72290063EB004B456A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -233,6 +242,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		86BDE994290B491F006E4816 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				86BDE995290B4935006E4816 /* ButtonHelpers.swift */,
+				86BDE998290B4AD0006E4816 /* ColorHelpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		86D88D64290063EA004B456A = {
 			isa = PBXGroup;
 			children = (
@@ -257,12 +275,14 @@
 				861A9DBE2902C41300D62192 /* Info.plist */,
 				86D88D70290063EB004B456A /* BookMediaApp.swift */,
 				8642E62D2908810500A0936C /* Database.swift */,
+				86BDE994290B491F006E4816 /* Helpers */,
 				86406BB52901BD1000B3CD8D /* NetworkLayer */,
 				86910C0B2900BE0E0048A7BD /* Extensions */,
 				86910C052900BB1E0048A7BD /* Model */,
 				86910C042900BB150048A7BD /* ViewModel */,
 				86910C032900BB0A0048A7BD /* View */,
 				86D88D74290063EE004B456A /* Assets.xcassets */,
+				86CDD17F290B516C00BC69EC /* LaunchScreen.storyboard */,
 				86D88D76290063EE004B456A /* Preview Content */,
 			);
 			path = BookMedia;
@@ -377,6 +397,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86CDD180290B516D00BC69EC /* LaunchScreen.storyboard in Resources */,
 				86D88D78290063EE004B456A /* Preview Assets.xcassets in Resources */,
 				86D88D75290063EE004B456A /* Assets.xcassets in Resources */,
 			);
@@ -386,6 +407,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86CDD181290B516D00BC69EC /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,9 +419,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				86028936290757D20081E026 /* ProfileView.swift in Sources */,
+				86BDE996290B4935006E4816 /* ButtonHelpers.swift in Sources */,
 				8651DF1A290960C500BB61E2 /* AllBooksListView.swift in Sources */,
 				86B3272D2906D19D00708D84 /* LoadingAnimationView.swift in Sources */,
 				86406BBB2901BDB200B3CD8D /* API.swift in Sources */,
+				86BDE999290B4AD0006E4816 /* ColorHelpers.swift in Sources */,
 				86406BB12901BAFF00B3CD8D /* Book.swift in Sources */,
 				869CE1CB29098A8A00FF8804 /* OrderConfirmationView.swift in Sources */,
 				86910C072900BB2F0048A7BD /* LoginViewModel.swift in Sources */,
@@ -435,10 +459,12 @@
 				861A9DC02902C5EC00D62192 /* MockNetworkService.swift in Sources */,
 				86910C092900BB850048A7BD /* LoginValidationTests.swift in Sources */,
 				86596F27290AEC5800179997 /* UserAuthenticationTests.swift in Sources */,
+				86BDE997290B4935006E4816 /* ButtonHelpers.swift in Sources */,
 				86910C102900C1AB0048A7BD /* String+extension.swift in Sources */,
 				86910C132900C84F0048A7BD /* User.swift in Sources */,
 				8651DF212909663500BB61E2 /* CartView.swift in Sources */,
 				86BDF07E290B022100E7E9C5 /* SavedItemTests.swift in Sources */,
+				86BDE99A290B4AD0006E4816 /* ColorHelpers.swift in Sources */,
 				8651DF1B290960C500BB61E2 /* AllBooksListView.swift in Sources */,
 				863D080D2907175D00F4696B /* SearchBar.swift in Sources */,
 				861A9DC52902C75A00D62192 /* URLRequestBuilder.swift in Sources */,
@@ -590,6 +616,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BookMedia/Preview Content\"";
@@ -601,6 +628,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -622,6 +650,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"BookMedia/Preview Content\"";
@@ -633,6 +662,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -28,10 +28,12 @@ struct ProfileView: View {
                     .frame(width: 50, height: 50)
                     .padding(8)
                 Text(User.shared.email)
+                    .font(.system(.headline, design: .rounded))
+                    .foregroundColor(.primary)
                 Button("Logout") {
                     authViewModel.updateValidation(success: false)
                 }
-                .foregroundColor(.purple)
+                .foregroundColor(Color.theme)
                 .padding(8)
             }
         }

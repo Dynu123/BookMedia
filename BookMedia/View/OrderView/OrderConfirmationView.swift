@@ -19,22 +19,12 @@ struct OrderConfirmationView: View {
             Text("Your order has been placed successfully")
                 .font(.title3)
             Spacer()
-            Button {
-                //
+            SolidButton(title: "Go back") {
                 navigateToHome = false
                 viewModel.cartItems = []
-            } label: {
-                Text("Go to home page")
-                    .font(.system(.body, design: .rounded))
-                    .foregroundColor(.white)
-                    .bold()
-                    .padding()
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .background(Color.purple)
-                    .cornerRadius(10)
-                    .padding(.horizontal)
             }
         }
+        .padding()
         .navigationBarBackButtonHidden()
         
     }

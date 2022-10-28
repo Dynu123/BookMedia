@@ -37,11 +37,11 @@ struct BookDetailView: View {
                         .padding(.vertical, 5)
                     HStack {
                         Text(viewModel.book.currencyCode + " " +  "\(viewModel.book.price.trimTrailingZeroes)")
-                            .foregroundColor(.purple)
+                            .foregroundColor(Color.theme)
                             .font(.system(.headline, design: .rounded))
                         Spacer()
                         Image(systemName: viewModel.contains(book) ? "bookmark.fill" : "bookmark")
-                            .foregroundColor(.purple)
+                            .foregroundColor(Color.theme)
                             .onTapGesture {
                                 viewModel.toggleFav(item: viewModel.book)
                             }
@@ -54,24 +54,10 @@ struct BookDetailView: View {
                         .foregroundColor(.secondary)
                         .font(.system(.headline, design: .rounded))
                     Spacer()
-                    
-                    Button {
-                        //buy action
+                    SolidButton(title: "Buy this book") {
                         viewModel.addToCart(book: viewModel.book)
                         navigateToCart = true
-                    } label: {
-                        HStack {
-                            Text("Buy this book")
-                                .font(.system(.body, design: .rounded))
-                                .foregroundColor(.white)
-                                .bold()
-                                .padding()
-                                .frame(minWidth: 0, maxWidth: .infinity)
-                                .background(Color.purple)
-                                .cornerRadius(10)
-                        }
-                    }
-                    .padding(.vertical, 40)
+                    }.padding(.vertical, 40)
                 }
                 .padding(.horizontal)
             }
@@ -91,7 +77,7 @@ struct BookDetailView: View {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Image(systemName: "arrow.left")
-                        .accentColor(.purple)
+                        .accentColor(Color.theme)
                 }
                 
             }
